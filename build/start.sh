@@ -18,6 +18,6 @@ if [ $HatH_KEY ]
 fi
 
 trap 'kill_jar' TERM INT KILL
-java -jar HentaiAtHome.jar $HatH_ARGS $HatH_OPTS  &
+java $JAVA_OPTS -jar HentaiAtHome.jar $HatH_ARGS $HatH_OPTS  &
 
 wait $!
