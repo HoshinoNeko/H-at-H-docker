@@ -17,10 +17,10 @@ if [ $HatH_KEY ]
 		fi
 fi
 
-ip rule delete from 127.0.0.1/8 iif lo table 543
-ip route delete local 0.0.0.0/0 dev lo table 543
-ip -6 rule delete from ::1/128 iif lo table 543
-ip -6 route delete local ::/0 dev lo table 543
+ip rule add from 127.0.0.1/8 iif lo table 543
+ip route add local 0.0.0.0/0 dev lo table 543
+ip -6 rule add from ::1/128 iif lo table 543
+ip -6 route add local ::/0 dev lo table 543
 
 ./go-mmproxy -4 127.0.0.1:443 -l 127.0.0.1:3000 &
 
