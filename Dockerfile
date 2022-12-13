@@ -32,7 +32,7 @@ WORKDIR /hath
 RUN apt-get update \
     && apt-get install -y sqlite \
     && rm -rf /var/lib/apt/lists/* \
-    && chmod +x /hath/start.sh
+    && chmod +x /hath/start.sh \
     && chmod +x /hath/go-mmproxy
 
 CMD ["/hath/start.sh"]
