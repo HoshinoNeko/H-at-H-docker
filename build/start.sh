@@ -38,7 +38,7 @@ fi
 
 add_route
 
-./go-mmproxy -4 127.0.0.1:443 -l 127.0.0.1:3000 &
+./go-mmproxy -4 127.0.0.1:443 -l 0.0.0.0:3000 &
 
 trap 'kill_jar' TERM INT KILL
 java $JAVA_OPTS -jar HentaiAtHome.jar $HatH_ARGS $HatH_OPTS  &
