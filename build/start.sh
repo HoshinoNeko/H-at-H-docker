@@ -5,6 +5,25 @@ kill_jar() {
   pkill java
   wait "$(ps -ef | pgrep java)"
   echo 'Process finished'
+  delete_route
+}
+
+add_route() {
+	echo "Adding route"
+	ip rule add from 127.0.0.1/8 iif lo table 543
+	ip route add local 0.0.0.0/0 dev lo table 543
+	ip -6 rule add from ::1/128 iif lo table 543
+	ip -6 route add local ::/0 dev lo table 543
+	echo "Route added"
+}
+
+delete_route() {
+	echo "Deleting route"
+	ip rule add from 127.0.0.1/8 iif lo table 543
+	ip route add local 0.0.0.0/0 dev lo table 543
+	ip -6 rule add from ::1/128 iif lo table 543
+	ip -6 route add local ::/0 dev lo table 543
+	echo "Route deleted"
 }
 
 if [ $HatH_KEY ]
@@ -17,10 +36,7 @@ if [ $HatH_KEY ]
 		fi
 fi
 
-ip rule add from 127.0.0.1/8 iif lo table 543
-ip route add local 0.0.0.0/0 dev lo table 543
-ip -6 rule add from ::1/128 iif lo table 543
-ip -6 route add local ::/0 dev lo table 543
+add_route
 
 ./go-mmproxy -4 127.0.0.1:443 -l 127.0.0.1:3000 &
 
