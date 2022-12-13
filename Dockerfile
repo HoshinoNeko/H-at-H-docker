@@ -30,7 +30,7 @@ COPY build/start.sh /hath/start.sh
 WORKDIR /hath
 
 RUN apt-get update \
-    && apt-get install -y sqlite \
+    && apt-get install -y sqlite iproute2 \
     && rm -rf /var/lib/apt/lists/* \
     && chmod +x /hath/start.sh \
     && chmod +x /hath/go-mmproxy
