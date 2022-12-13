@@ -10,16 +10,16 @@ RUN apk --no-cache add unzip \
     && wget https://repo.e-hentai.org/hath/HentaiAtHome_$HatH_VERSION.zip -O hath.zip \
     && echo -n ""$HatH_SHA256"  hath.zip" | sha256sum -c \
     && unzip hath.zip \
+    && rm hath.zip \
     && mkdir -p /hath/data \
-    && mkdir -p /hath/download
-
-RUN DOCKER_ARCH=$(case ${TARGETPLATFORM:-linux/amd64} in \
+    && mkdir -p /hath/download \
+    DOCKER_ARCH=$(case ${TARGETPLATFORM:-linux/amd64} in \
         "linux/amd64")   echo "linux-64"  ;; \
         "linux/arm/v7")  echo "linux-arm32-v7a"   ;; \
         "linux/arm64")   echo "linux-arm64-v8a" ;; \
         *)               echo ""        ;; esac) \
     && echo "DOCKER_ARCH=$DOCKER_ARCH" \
-    && wget -O go-mmproxy "https://github.com/HoshinoNeko/go-mmproxy/releases/download/master/go-mmproxy-${DOCKER_ARCH}"
+    && wget -O /hath/go-mmproxy "https://github.com/HoshinoNeko/go-mmproxy/releases/download/master/go-mmproxy-${DOCKER_ARCH}"
 
 FROM eclipse-temurin:11-jre-jammy AS release
 
