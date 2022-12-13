@@ -12,8 +12,9 @@ RUN apk --no-cache add unzip \
     && unzip hath.zip \
     && rm hath.zip \
     && mkdir -p /hath/data \
-    && mkdir -p /hath/download \
-    DOCKER_ARCH=$(case ${TARGETPLATFORM:-linux/amd64} in \
+    && mkdir -p /hath/download
+
+RUN DOCKER_ARCH=$(case ${TARGETPLATFORM:-linux/amd64} in \
         "linux/amd64")   echo "linux-64"  ;; \
         "linux/arm/v7")  echo "linux-arm32-v7a"   ;; \
         "linux/arm64")   echo "linux-arm64-v8a" ;; \
